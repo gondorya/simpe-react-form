@@ -22,7 +22,7 @@ export const Form = ({inputs, buttonText = "Submit"}: FormProps) => {
         <div className="form-content">
             {Object.keys(formInputsData).map((formInputName: string) =>
                 (
-                    <label className="form-input-label">
+                    <label key={formInputName} className="form-input-label">
                         <span>{formInputsData[formInputName].label}</span>
                         <input type="text" className="form-input" value={formInputsData[formInputName].value} name={formInputName} onChange={({target: {value}}) => setFormInputsData((prevState: {[p: string]: InputsProps }) => ({
                             ...prevState,
