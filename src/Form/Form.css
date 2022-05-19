@@ -13,3 +13,7 @@
     margin-top: 5px;
     padding: 10px 5px;
 }
+
+.form-input-error {
+    color: #cc0000;
+}
