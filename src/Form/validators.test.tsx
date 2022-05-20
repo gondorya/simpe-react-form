@@ -22,7 +22,7 @@ test("notBlank - checks if text is not blank", () => {
     expect(notBlank()("       ")).toBeFalsy();
 });
 
-test("alphaNum - checks is text contains only letters and numbers", () => {
+test("alphaNum - checks if text contains only letters and numbers", () => {
     expect(alphaNum()("Simpl3T3xt")).toBeTruthy();
     expect(alphaNum()("Simpl3 T3xt^")).toBeFalsy()
 });
