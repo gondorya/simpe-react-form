@@ -112,7 +112,7 @@ Example usages in validation prop:
         }
     ]
     const validation = (values) => {
-        const {nickname, firstName, lastName, city} = values;
+        const {firstName, lastName} = values;
         return ({
             firstName: validate(
                 firstName,
@@ -186,3 +186,32 @@ Checks if the text matches this pattern
 like(/^[a-z0-9]+$/i)("text") // => true
 like(/^[a-z0-9]+$/i)("text!") // => false
 ```
+
+## Custom validation functions
+
+You can also add your own validation function. This function should take the value of the validated input as an argument:
+`(value: string) => boolean;`
+
+For example, if you want a user's nickname to start with a company name ("acme.")
+
+```javascript
+    const customValidator = (value) => value.startsWith("acme.");
+
+    const inputs = [
+        {
+            name: "nickname",
+            label: "Nickname"
+        },
+    ]
+    const validation = (values) => {
+        const {nickname} = values;
+        return ({
+            nickname: validate(
+                nickname,
+                is(customValidator, "Nickname must include 'acme.' prefix"),
+            ),
+        })
+    }
+    <Form validation={validation} inputs={inputs}/>
+```
+
