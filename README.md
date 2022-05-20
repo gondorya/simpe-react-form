@@ -58,7 +58,7 @@ validation: (values: { [x: string]: string; }) => ({ [key: string]: string })
 
 It is recommended to use the methods from the prepared validation:
 
-*validate*
+***validate***
 
 It takes a value and all validating functions as attributes.
 
@@ -72,7 +72,7 @@ validate: (value: string, ...validators: {(v: string): string}[]) => string
 validate("Jonathan", func1(), func2())
 ```
 
-*is*
+***is***
 
 Takes as attributes validating function and string to be returned if validation fails. Returns a function that takes the value of the validated input as an argument.
 
@@ -131,7 +131,7 @@ Example usages in validation prop:
 
 ## Prepared validation functions
 
-*notBlank*
+***notBlank***
 
 checks if the value of input is not empty
 
@@ -141,7 +141,7 @@ notBlank()("       ") // => false
 notBlank()("Message") // => true
 ```
 
-*longerThan*
+***longerThan***
 
 Takes number as an argument. 
 Checks if the value is longer than this number.
@@ -151,7 +151,7 @@ longerThan(3)("Jo") // => false
 longerThan(3)("John") // => true
 ```
 
-*notLongerThan*
+***notLongerThan***
 
 Takes number as an argument.
 Checks if the value is not longer than this number.
@@ -161,7 +161,7 @@ notLongerThan(3)("Jo") // => true
 notLongerThan(3)("John") // => false
 ```
 
-*alphaNum*
+***alphaNum***
 
 Checks if text contains only letters and numbers
 
@@ -170,7 +170,8 @@ alphaNum()("l0ng$ t3xt!") // => false
 alphaNum()("longT3xt") // => true
 ```
 
-*ascii*
+***ascii***
+
 Checks if text contains only American Standard Code
 
 ```javascript
@@ -178,7 +179,8 @@ ascii()("Poznań") // => false
 ascii()("Poznan") // => true
 ```
 
-*like*
+***like***
+
 Takes RegExp pattern as an argument.
 Checks if the text matches this pattern
 
