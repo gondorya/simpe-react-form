@@ -32,7 +32,6 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
     });
 
     const [formInputsData, setFormInputsData] = useState<{[x: string]: InputsProps}>(inputsObject);
-
     const [errors, setErrors] = useState(errorsObject)
 
     const submitHandler = (e: any) => {
@@ -43,10 +42,10 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
             ...prevState,
             ...validationResult,
         }))
+        e.preventDefault()
         if(Object.values(validationResult).every((field) => !field)) {
+            setFormInputsData(inputsObject)
             return onSubmit(valuesObject)
-        } else {
-            e.preventDefault()
         }
     }
 
@@ -75,6 +74,6 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
              )}
         </div>
 
-        <button type="submit">{buttonText}</button>
+        <button className="button" type="submit">{buttonText}</button>
     </form>
 }

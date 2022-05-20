@@ -3,3 +3,18 @@
   margin: 0 auto;
   padding: 30px;
 }
+
+.result {
+  margin-top: 20px;
+  border: 1px solid #3396FF;
+  border-bottom: none;
+}
+
+.row {
+  padding: 10px 5px;
+  border-bottom: 1px solid #3396FF;
+}
+
+.title {
+  font-weight: bold;
+}

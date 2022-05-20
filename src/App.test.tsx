@@ -16,7 +16,7 @@ test("doesn't render validation texts at default", () => {
   render(<App />);
   expect(screen.queryByText("Nickname must include 'acme.' prefix")).not.toBeInTheDocument();
   expect(screen.queryByText("First Name field cannot be empty")).not.toBeInTheDocument();
-  expect(screen.queryByText("First Name must have at least 3 characters")).not.toBeInTheDocument();
+  expect(screen.queryByText("First Name must have more than 3 characters")).not.toBeInTheDocument();
   expect(screen.queryByText("First Name can't have more than 10 characters")).not.toBeInTheDocument();
   expect(screen.queryByText("Last Name can contain only numbers and letters")).not.toBeInTheDocument();
   expect(screen.queryByText("City can contain only American Standard Code characters")).not.toBeInTheDocument();
@@ -47,7 +47,7 @@ test("renders validation for first name", async () => {
     screen.getByText("Submit").click();
   })
   expect(screen.getByText("First Name field cannot be empty")).toBeVisible();
-  expect(screen.queryByText("First Name must have at least 3 characters")).not.toBeInTheDocument();
+  expect(screen.queryByText("First Name must have more than 3 characters")).not.toBeInTheDocument();
   expect(screen.queryByText("First Name can't have more than 10 characters")).not.toBeInTheDocument();
 
 
@@ -59,7 +59,7 @@ test("renders validation for first name", async () => {
   });
 
   expect(screen.queryByText("First Name field cannot be empty")).not.toBeInTheDocument();
-  expect(screen.getByText("First Name must have at least 3 characters")).toBeVisible();
+  expect(screen.getByText("First Name must have more than 3 characters")).toBeVisible();
   expect(screen.queryByText("First Name can't have more than 10 characters")).not.toBeInTheDocument();
 
   fireEvent.change(screen.getByLabelText(/First name/),
@@ -70,7 +70,7 @@ test("renders validation for first name", async () => {
   });
 
   expect(screen.queryByText("First Name field cannot be empty")).not.toBeInTheDocument();
-  expect(screen.queryByText("First Name must have at least 3 characters")).not.toBeInTheDocument();
+  expect(screen.queryByText("First Name must have more than 3 characters")).not.toBeInTheDocument();
   expect(screen.getByText("First Name can't have more than 10 characters")).toBeVisible();
 });
 

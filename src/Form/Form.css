@@ -15,5 +15,21 @@
 }
 
 .form-input-error {
-    color: #cc0000;
+    color: #CC0000;
+}
+
+.button {
+    background-color: #3396FF;
+    padding: 10px 5px;
+    min-width: 120px;
+    border: 2px solid #3396FF;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #FFF;
+    transition: all ease-out 200ms;
+}
+
+.button:hover {
+    background-color: #FFF;
+    color: #3396FF;
 }

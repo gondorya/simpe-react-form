@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Form, is, validate, notBlank, longerThan, notLongerThan, alphaNum, ascii} from "./Form"
 
 function App() {
+    const [data, setData] = useState<{[x: string]: string}>({})
     const inputs = [
         {
             name: "nickname",
@@ -22,7 +23,7 @@ function App() {
         }
     ]
     const onSubmit = (values: { [x: string]: string; }) => {
-        console.log(values)
+        setData(values)
     }
     const customValidator = () => (value: string) => value.startsWith("acme.");
 
@@ -36,7 +37,7 @@ function App() {
             firstName: validate(
                 firstName,
                 is(notBlank(), "First Name field cannot be empty"),
-                is(longerThan(3), "First Name must have at least 3 characters"),
+                is(longerThan(3), "First Name must have more than 3 characters"),
                 is(notLongerThan(10), "First Name can't have more than 10 characters")
             ),
             lastName: validate(
@@ -52,11 +53,23 @@ function App() {
 
   return (
     <div className="container">
-        <Form
-            validation={validation}
-            onSubmit={onSubmit}
-            inputs={inputs}
-        />
+        <div className="form-wrapper">
+            <Form
+                validation={validation}
+                onSubmit={onSubmit}
+                inputs={inputs}
+            />
+        </div>
+        {
+            Object.values(data).length ?  (
+                <div className="result">
+                    <div className="row"><span className="title">Nickname: </span><span>{data.nickname}</span></div>
+                    <div className="row"><span className="title">First Name: </span><span>{data.firstName}</span></div>
+                    <div className="row"><span className="title">Last Name: </span><span>{data.lastName}</span></div>
+                    <div className="row"><span className="title">City: </span><span>{data.city}</span></div>
+                </div>
+            ) : null
+        }
     </div>
   );
 }
