@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import './Form.css';
 
-
 interface InputProps {
     name: string,
     label: string,
@@ -27,7 +26,9 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
     const inputsObject: {[key: string]: InputsProps} = {};
     const errorsObject: {[key: string]: string} = {};
     inputs.forEach((item: InputsObject) => {
-        Object.assign(inputsObject, { [item.name]: {label: item.label, name: item.name, value: item.value || ""} });
+        Object.assign(inputsObject, {
+            [item.name]: {label: item.label, name: item.name, value: item.value || ""}
+        });
         Object.assign(errorsObject, { [item.name]: ""})
     });
 
@@ -66,7 +67,13 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
                 (
                     <label key={formInputName} className="form-input-label">
                         <span>{formInputsData[formInputName].label}</span>
-                        <input type="text" className="form-input" value={formInputsData[formInputName].value} name={formInputName} onChange={(event) => onChangeHandler({event, formInputName})}/>
+                        <input
+                            type="text"
+                            className="form-input"
+                            value={formInputsData[formInputName].value}
+                            name={formInputName}
+                            onChange={(event) => onChangeHandler({event, formInputName})}
+                        />
                         {errors[formInputName] && <span className="form-input-error">{errors[formInputName]}</span>}
                     </label>
 

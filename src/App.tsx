@@ -63,10 +63,22 @@ function App() {
         {
             Object.values(data).length ?  (
                 <div className="result">
-                    <div className="row"><span className="title">Nickname: </span><span>{data.nickname}</span></div>
-                    <div className="row"><span className="title">First Name: </span><span>{data.firstName}</span></div>
-                    <div className="row"><span className="title">Last Name: </span><span>{data.lastName}</span></div>
-                    <div className="row"><span className="title">City: </span><span>{data.city}</span></div>
+                    <div className="row">
+                        <span className="title">Nickname: </span>
+                        <span>{data.nickname}</span>
+                    </div>
+                    <div className="row">
+                        <span className="title">First Name: </span>
+                        <span>{data.firstName}</span>
+                    </div>
+                    <div className="row">
+                        <span className="title">Last Name: </span>
+                        <span>{data.lastName}</span>
+                    </div>
+                    <div className="row">
+                        <span className="title">City: </span>
+                        <span>{data.city}</span>
+                    </div>
                 </div>
             ) : null
         }
