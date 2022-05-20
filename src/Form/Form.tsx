@@ -1,23 +1,32 @@
 import React, {useState} from 'react';
 import './Form.css';
 
-interface InputsProps {
+
+interface InputProps {
     name: string,
     label: string,
-    value?: string
+}
+
+interface InputsProps extends InputProps{
+    value: string
 }
 
 interface FormProps {
-    inputs: InputsProps[]
+    inputs: InputProps[]
     buttonText?: string,
-    onSubmit: (values: { [x: string]: string | undefined; }) => void,
-    validation: any
+    onSubmit: (values: { [key: string]: string }) => void,
+    validation?: (values: { [x: string]: string; }) => ({ [key: string]: string })
+}
+
+
+interface InputsObject extends InputProps {
+    value?: string
 }
 
 export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: FormProps) => {
     const inputsObject: {[key: string]: InputsProps} = {};
     const errorsObject: {[key: string]: string} = {};
-    inputs.forEach((item: InputsProps) => {
+    inputs.forEach((item: InputsObject) => {
         Object.assign(inputsObject, { [item.name]: {label: item.label, name: item.name, value: item.value || ""} });
         Object.assign(errorsObject, { [item.name]: ""})
     });
@@ -29,18 +38,16 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
     const submitHandler = (e: any) => {
         const valuesObject = Object.keys(formInputsData).reduce(
             (obj: {}, key: string) => Object.assign(obj, { [key]: formInputsData[key].value }), {})
-        const validationResult = validation(valuesObject);
+        const validationResult = validation ? validation(valuesObject) : {};
         setErrors((prevState) => ({
             ...prevState,
             ...validationResult,
         }))
-
         if(Object.values(validationResult).every((field) => !field)) {
             return onSubmit(valuesObject)
         } else {
             e.preventDefault()
         }
-
     }
 
     const onChangeHandler = ({event: {target: {value}}, formInputName}: {event: {target: {value: string}}, formInputName: string}) => {

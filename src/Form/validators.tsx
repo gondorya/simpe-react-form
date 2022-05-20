@@ -10,10 +10,12 @@ export const is = (predicate: (v: string) => boolean, message: string) => (value
     if(!predicate(value)) {
         return message
     }
+
+    return ""
 };
 
-export const validate = (value: string, ...validators: {(v: string): string | undefined}[]) => {
-    let result: string | undefined = "";
+export const validate = (value: string, ...validators: {(v: string): string}[]) => {
+    let result: string = "";
     let i = 0;
     while (!result && i < validators.length) {
         result = validators[i](value);
