@@ -195,7 +195,7 @@ You can also add your own validation function. This function should take the val
 For example, if you want a user's nickname to start with a company name ("acme.")
 
 ```javascript
-    const customValidator = (value) => value.startsWith("acme.");
+    const customValidator = () => (value) => value.startsWith("acme.");
 
     const inputs = [
         {
@@ -208,7 +208,7 @@ For example, if you want a user's nickname to start with a company name ("acme."
         return ({
             nickname: validate(
                 nickname,
-                is(customValidator, "Nickname must include 'acme.' prefix"),
+                is(customValidator(), "Nickname must include 'acme.' prefix"),
             ),
         })
     }
