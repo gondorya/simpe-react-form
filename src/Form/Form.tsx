@@ -27,16 +27,18 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
     const [errors, setErrors] = useState(errorsObject)
 
     const submitHandler = (e: any) => {
-        e.preventDefault()
         const valuesObject = Object.keys(formInputsData).reduce(
             (obj: {}, key: string) => Object.assign(obj, { [key]: formInputsData[key].value }), {})
-        const f = validation(valuesObject);
+        const validationResult = validation(valuesObject);
         setErrors((prevState) => ({
             ...prevState,
-            ...f,
+            ...validationResult,
         }))
-        if(Object.values(f).every((field) => !field)) {
+
+        if(Object.values(validationResult).every((field) => !field)) {
             return onSubmit(valuesObject)
+        } else {
+            e.preventDefault()
         }
 
     }
@@ -66,6 +68,6 @@ export const Form = ({inputs, buttonText = "Submit", onSubmit, validation}: Form
              )}
         </div>
 
-        <button>{buttonText}</button>
+        <button type="submit">{buttonText}</button>
     </form>
 }
