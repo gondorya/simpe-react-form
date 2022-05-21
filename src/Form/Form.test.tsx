@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { waitFor, fireEvent  } from '@testing-library/dom';
+import { fireEvent  } from '@testing-library/dom';
 
 import {Form} from "./Form";
 
@@ -46,35 +46,32 @@ test("renders custom text on button as default", () => {
     expect(screen.getByText("Send")).toBeVisible();
 });
 
-test("calls validation function after click on submit button", async () => {
+test("calls validation function after click on submit button",  () => {
     const validation = jest.fn(() => ({}));
     setup({validation});
 
-    await waitFor(() => {
-        fireEvent.submit(screen.getByText("Submit"));
-    });
+    fireEvent.submit(screen.getByText("Submit"));
+
     expect(validation).toHaveBeenCalledWith({city: "", hobby: "", username: ""})
 });
 
-test("calls onSubmit function after click on submit button", async () => {
+test("calls onSubmit function after click on submit button",  () => {
     const validation = jest.fn(() => ({}));
 
     setup({validation});
 
-    await waitFor(() => {
-        fireEvent.submit(screen.getByText("Submit"));
-    });
+    fireEvent.submit(screen.getByText("Submit"));
+
     expect(onSubmit).toHaveBeenCalledWith({city: "", hobby: "", username: ""})
 });
 
-test("does not call onSubmit function after click on submit button if validation returns some errors", async () => {
+test("does not call onSubmit function after click on submit button if validation returns some errors",  () => {
     const validation = jest.fn(() => ({city: "Too long"}));
     setup({
         validation
     });
 
-    await waitFor(() => {
-        fireEvent.submit(screen.getByText("Submit"));
-    });
+    fireEvent.submit(screen.getByText("Submit"));
+
     expect(onSubmit).not.toHaveBeenCalled()
 })
