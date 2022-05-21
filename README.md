@@ -20,7 +20,9 @@ A main component that manages the form state and its items
 
 **inputs**
 
-Required. An array of inputs to be displayed in the form. Each input is an object with the following keys: name and label
+Required. An array of inputs to be displayed in the form. Each input is an object with the following keys: name and label.
+
+It's a simple way to create inputs of the same type. User decides the order of inputs.
 
 ```javascript
 inputs: [{
@@ -50,7 +52,11 @@ onSubmit: (values: { [key: string]: string }) => void
 
 **validation**
 
-Optional. A function that takes input values as arguments and returns an object with inputs names and validation messages (if validation failed)
+Optional. A function that takes an object with inputs names as a keys and inputs values as a values. It returns an object with inputs names and validation messages (if validation failed).
+
+Thanks to this, the user decides which inputs are to be validated and which are not.
+
+User can also use a value from a completely different field to validate a selected field
 
 ```javascript
 validation: (values: { [x: string]: string; }) => ({ [key: string]: string })
@@ -60,9 +66,10 @@ It is recommended to use the methods from the prepared validation:
 
 - ***validate***
 
-It takes a value and all validating functions as attributes.
+It takes an input value and all validating functions as attributes.
 
 Each of the validating functions must take the input value as an attribute and return a message to be displayed if validation fails. Validate returns the message returned by the first validator that fails.
+This allows you to add several conditions with different messages to one field. You can also create your own validating functions.
 
 ```javascript
 validate: (value: string, ...validators: {(v: string): string}[]) => string
