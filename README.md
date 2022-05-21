@@ -56,7 +56,7 @@ Optional. A function that takes an object with inputs names as a keys and inputs
 
 Thanks to this, the user decides which inputs are to be validated and which are not.
 
-User can also use a value from a completely different field to validate a selected field
+User can also use the value of one field to validate the other field
 
 ```javascript
 validation: (values: { [x: string]: string; }) => ({ [key: string]: string })
